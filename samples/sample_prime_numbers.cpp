@@ -132,10 +132,10 @@ int main()
     cout << "c (c=a, len was 4): " << c << endl;
 
     // operator>>
-    TBitField d(10);
+    /*TBitField d(10);
     cout << "Enter 10 bits (0/1): ";
     cin >> d;
-    cout << "d: " << d << endl;
+    cout << "d: " << d << endl;*/
 
     // Проверка границ TELEM
     const int B = 8 * sizeof(TELEM);
@@ -143,6 +143,19 @@ int main()
     e.SetBit(B - 1);
     e.SetBit(B);
     cout << "e (len=" << B + 2 << ", bits " << B - 1 << " and " << B << "): " << e << endl;
+
+    TBitField b1(33);
+    b1.SetBit(5);
+    b1.SetBit(6);
+    b1.SetBit(7);
+    TBitField b2(35);
+    b2.SetBit(0);
+    b2.SetBit(1);
+    b2.SetBit(2);
+    cout << "b1 " << b1 << endl;
+    cout << "b2 " << b2 << endl;
+	cout << (b1 | (b2)) << endl;
+    cout << (b1 & (b2)) << endl;
 
     // Исключения при выходе за диапазон
     try { a.SetBit(-1); }

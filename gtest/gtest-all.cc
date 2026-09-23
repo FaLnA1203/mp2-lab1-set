@@ -105,6 +105,9 @@
 //
 // Utilities for testing Google Test itself and code that uses Google Test
 // (e.g. frameworks built on top of Google Test).
+#define _VARIADIC_MAX 10
+#define GTEST_HAS_TR1_TUPLE 0
+#define GTEST_HAS_TR1_TUPLE 1
 
 #ifndef GTEST_INCLUDE_GTEST_GTEST_SPI_H_
 #define GTEST_INCLUDE_GTEST_GTEST_SPI_H_
