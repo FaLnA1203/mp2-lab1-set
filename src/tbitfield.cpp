@@ -40,6 +40,9 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
+    if ((n < 0) || (n > BitLen - 1)) {
+        throw "несуществующий индекс";
+    }
     return n / (sizeof(TELEM) * 8);
 }
 
