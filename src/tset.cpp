@@ -56,52 +56,86 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 
 TSet& TSet::operator=(const TSet &s) // присваивание
 {
-    return FAKE_SET;
+    MaxPower = s.MaxPower;
+    BitField = s.BitField;
+    return *this;
 }
 
 int TSet::operator==(const TSet &s) const // сравнение
 {
-    return FAKE_INT;
+    if ((MaxPower == s.MaxPower) && (BitField == s.BitField)) {
+        return 1;
+    }
+    else return 0;
 }
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-    return FAKE_INT;
+    if ((MaxPower != s.MaxPower) || (BitField != s.BitField)) {
+        return 1;
+    }
+    else return 0;
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    return FAKE_SET;
+    TBitField res = BitField | s.BitField;
+    TSet setres(res);
+    return setres;
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    return FAKE_SET;
+    TSet res(BitField);
+    res.InsElem(Elem);
+    return res;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-    return FAKE_SET;
+    TSet res(BitField);
+    res.DelElem(Elem);
+    return res;
 }
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-    return FAKE_SET;
+    TBitField res = BitField & s.BitField;
+    TSet setres(res);
+    return setres;
 }
 
 TSet TSet::operator~(void) // дополнение
 {
-    return FAKE_SET;
+    return ~BitField;
 }
 
 // перегрузка ввода/вывода
 
-istream &operator>>(istream &istr, TSet &s) // ввод
+istream& operator>>(istream& istr, TSet& s) // ввод
 {
+    char a;
+    int b;
+    do {
+        istr >> a;
+        if (a == '{') {
+            istr >> b >> a;
+        }
+    } while (a != '}');
     return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
+    ostr << "{";
+    int first = true;
+    for (int i = 0; i < s.MaxPower; i++) {
+        if (s.IsMember(i)) {
+            if (!first) ostr << ", ";
+            ostr << i;
+            first = false;
+       }
+    }
+    ostr << "}";
     return ostr;
 }

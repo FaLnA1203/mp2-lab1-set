@@ -9,22 +9,22 @@
 #include <iostream>
 
 
-// #define USE_SET // Использовать класс TSet,
+#define USE_SET // Использовать класс TSet,
                 // закоментировать, чтобы использовать битовое поле
 
 #ifndef USE_SET // Использовать класс TBitField
 
 #include "tbitfield.h"
-using namespace std;
+
 
 int main()
 {
   int n, m, k, count;
 
   setlocale(LC_ALL, "Russian");
-  cout << "Тестирование программ поддержки битового поля" << endl;
-  cout << "             Решето Эратосфена" << endl;
-  cout << "Введите верхнюю границу целых значений - ";
+  std::cout << "Тестирование программ поддержки битового поля" << endl;
+  std::cout << "             Решето Эратосфена" << endl;
+  std::cout << "Введите верхнюю границу целых значений - ";
   cin  >> n;
   TBitField s(n + 1);
   // заполнение множества
@@ -38,20 +38,20 @@ int main()
         if (s.GetBit(k))
           s.ClrBit(k);
   // оставшиеся в s элементы - простые числа
-  cout << endl << "Печать множества некратных чисел" << endl << s << endl;
-  cout << endl << "Печать простых чисел" << endl;
+  std::cout << endl << "Печать множества некратных чисел" << endl << s << endl;
+  std::cout << endl << "Печать простых чисел" << endl;
   count = 0;
   k = 1;
   for (m = 2; m <= n; m++)
     if (s.GetBit(m))
     {
       count++;
-      cout << setw(3) << m << " ";
+      std::cout << setw(3) << m << " ";
       if (k++ % 10 == 0)
-        cout << endl;
+          std::cout << endl;
     }
-  cout << endl;
-  cout << "В первых " << n << " числах " << count << " простых" << endl;
+  std::cout << endl;
+  std::cout << "В первых " << n << " числах " << count << " простых" << endl;
 }
 #else
 
@@ -138,7 +138,7 @@ int main()
     /*TBitField d(10);
     cout << "Enter 10 bits (0/1): ";
     cin >> d;
-    cout << "d: " << d << endl;*/
+    cout << "d: " << d << endl;
 
     // Проверка границ TELEM
     const int B = 8 * sizeof(TELEM);
